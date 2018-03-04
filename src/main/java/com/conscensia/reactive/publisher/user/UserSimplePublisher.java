@@ -31,6 +31,9 @@ public class UserSimplePublisher extends Flux<User> {
         for (int i = 0; i < NUMBER_OF_USERS; i++) {
             try {
                 User user = userProvider.generateNextUser();
+                /*if (user.getName().startsWith("A")) {
+                    throw new IllegalArgumentException("Exception");
+                }*/
                 observer.onNext(user);
             } catch (Exception e) {
                 observer.onError(e);

@@ -30,8 +30,8 @@ public class BufferableSubscriber implements Subscriber{
                 .take(20)
                 .buffer(3)
                 .subscribe(users -> {
-                    sleepThread();
                     System.out.println(String.format("Bufferable subscriber. Thread: %s. %s", Thread.currentThread().getName(), users));
+                    sleepThread();
                 });
     }
 }

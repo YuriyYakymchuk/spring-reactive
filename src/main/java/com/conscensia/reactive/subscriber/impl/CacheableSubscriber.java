@@ -31,14 +31,14 @@ public class CacheableSubscriber implements Subscriber{
 
         cache.take(5)
              .subscribe(user -> {
-                 sleepThread();
                  System.out.println("Cachable subscriber. First subscriber. " + user);
+                 sleepThread();
              });
 
         cache.take(5)
              .subscribe(user -> {
-                sleepThread();
                  System.out.println("Cachable subscriber. Second subscriber. " + user);
+                 sleepThread();
              });
     }
 }

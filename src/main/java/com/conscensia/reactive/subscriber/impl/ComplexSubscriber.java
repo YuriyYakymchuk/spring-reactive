@@ -21,12 +21,12 @@ public class ComplexSubscriber implements Subscriber{
 
     @Override
     public void subscribe() {
-        Calendar date = Calendar.getInstance();
-        date.set(Calendar.YEAR, 1990);
+        Calendar nintiesYear = Calendar.getInstance();
+        nintiesYear.set(Calendar.YEAR, 1990);
 
         publisher.subscribeOn(Schedulers.elastic())
                 .take(Duration.ofSeconds(10))
-                .filter(user -> user.getBirthDay().after(date.getTime()))
+                .filter(user -> user.getBirthDay().after(nintiesYear.getTime()))
                 .map(user -> "User name: " + user.getName() + " was born in " + user.getBirthDay())
                 .subscribe(System.out::println);
     }

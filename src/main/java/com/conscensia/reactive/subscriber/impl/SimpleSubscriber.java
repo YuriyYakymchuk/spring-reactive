@@ -23,8 +23,8 @@ public class SimpleSubscriber implements Subscriber{
              .subscribe(
                 // On next handling
                 user -> {
-                    sleepThread();
                     System.out.println(String.format("Simple Subscriber. Thread: %s. %s", Thread.currentThread().getName(), user));
+                    sleepThread();
                 },
                 // On error handling
                 error -> System.err.println("Error happened: " + error.getMessage()),
