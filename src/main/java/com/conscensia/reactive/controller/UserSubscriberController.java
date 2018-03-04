@@ -1,6 +1,6 @@
 package com.conscensia.reactive.controller;
 
-import com.conscensia.reactive.subscriber.*;
+import com.conscensia.reactive.subscriber.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,24 +18,24 @@ public class UserSubscriberController {
 
     private final BufferableSubscriber bufferableSubscriber;
 
-    private final CachableSubscriber cachableSubscriber;
-
-    private final ZipSubscriber zipSubscriber;
+    private final CacheableSubscriber cacheableSubscriber;
 
     private final MergeSubscriber mergeSubscriber;
 
-    private final BackPressureSubscriber backPressureSubscriber;
+    private final ZipSubscriber zipSubscriber;
+
+    private final ComplexSubscriber complexSubscriber;
 
     @Autowired
-    public UserSubscriberController(SimpleSubscriber simpleSubscriber, BufferableSubscriber bufferableSubscriber, CachableSubscriber cachableSubscriber,
-                                    ZipSubscriber zipSubscriber, ErrorSubscriber errorSubscriber, MergeSubscriber mergeSubscriber, BackPressureSubscriber backPressureSubscriber) {
+    public UserSubscriberController(SimpleSubscriber simpleSubscriber, BufferableSubscriber bufferableSubscriber, CacheableSubscriber cacheableSubscriber,
+                                    ErrorSubscriber errorSubscriber, MergeSubscriber mergeSubscriber, ZipSubscriber zipSubscriber, ComplexSubscriber complexSubscriber) {
         this.simpleSubscriber = simpleSubscriber;
         this.errorSubscriber = errorSubscriber;
         this.bufferableSubscriber = bufferableSubscriber;
-        this.cachableSubscriber = cachableSubscriber;
-        this.zipSubscriber = zipSubscriber;
+        this.cacheableSubscriber = cacheableSubscriber;
         this.mergeSubscriber = mergeSubscriber;
-        this.backPressureSubscriber = backPressureSubscriber;
+        this.zipSubscriber = zipSubscriber;
+        this.complexSubscriber = complexSubscriber;
     }
 
     @PostMapping("/simple")
@@ -58,14 +58,8 @@ public class UserSubscriberController {
 
     @PostMapping("/cache")
     public ResponseEntity<String> createCachableSubscription() {
-        cachableSubscriber.subscribe();
+        cacheableSubscriber.subscribe();
         return new ResponseEntity<>("Cachable subscription has been created.", HttpStatus.CREATED);
-    }
-
-    @PostMapping("/zip")
-    public ResponseEntity<String> createZipSubscription() {
-        zipSubscriber.subscribe();
-        return new ResponseEntity<>("Zip subscription has been created.", HttpStatus.CREATED);
     }
 
     @PostMapping("/merge")
@@ -74,10 +68,16 @@ public class UserSubscriberController {
         return new ResponseEntity<>("Merge subscription has been created.", HttpStatus.CREATED);
     }
 
-    @PostMapping("/backpressure")
-    public ResponseEntity<String> createBackPressureSubscription() {
-        backPressureSubscriber.subscribe();
-        return new ResponseEntity<>("BackPressure subscription has been created.", HttpStatus.CREATED);
+    @PostMapping("/zip")
+    public ResponseEntity<String> createZipSubscription() {
+        zipSubscriber.subscribe();
+        return new ResponseEntity<>("Zip subscription has been created.", HttpStatus.CREATED);
+    }
+
+    @PostMapping("/complex")
+    public ResponseEntity<String> createComplexSubscription() {
+        complexSubscriber.subscribe();
+        return new ResponseEntity<>("Complex subscription has been created.", HttpStatus.CREATED);
     }
 
 }

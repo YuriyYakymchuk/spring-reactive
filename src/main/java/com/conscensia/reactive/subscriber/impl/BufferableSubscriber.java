@@ -1,6 +1,7 @@
-package com.conscensia.reactive.subscriber;
+package com.conscensia.reactive.subscriber.impl;
 
 import com.conscensia.reactive.publisher.user.UserInfinityPublisher;
+import com.conscensia.reactive.subscriber.Subscriber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import reactor.core.scheduler.Schedulers;
@@ -14,7 +15,7 @@ import static com.conscensia.reactive.subscriber.SubscriberUtils.sleepThread;
  * Buffer can be introduced by capacity or time wait.
  */
 @Component
-public class BufferableSubscriber {
+public class BufferableSubscriber implements Subscriber{
 
     private final UserInfinityPublisher publisher;
 

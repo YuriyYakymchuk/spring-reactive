@@ -1,7 +1,8 @@
-package com.conscensia.reactive.subscriber;
+package com.conscensia.reactive.subscriber.impl;
 
 import com.conscensia.reactive.domain.User;
 import com.conscensia.reactive.publisher.user.UserInfinityPublisher;
+import com.conscensia.reactive.subscriber.Subscriber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
@@ -14,12 +15,12 @@ import static com.conscensia.reactive.subscriber.SubscriberUtils.sleepThread;
  * cache. It's configurable how many items should be cached.
  */
 @Component
-public class CachableSubscriber {
+public class CacheableSubscriber implements Subscriber{
 
     private final UserInfinityPublisher publisher;
 
     @Autowired
-    public CachableSubscriber(UserInfinityPublisher publisher) {
+    public CacheableSubscriber(UserInfinityPublisher publisher) {
         this.publisher = publisher;
     }
 
@@ -28,14 +29,12 @@ public class CachableSubscriber {
             .subscribeOn(Schedulers.elastic())
             .cache();
 
-        System.out.println("First subscriber.");
         cache.take(5)
              .subscribe(user -> {
                  sleepThread();
                  System.out.println("Cachable subscriber. First subscriber. " + user);
              });
 
-        System.out.println("Second subscriber.");
         cache.take(5)
              .subscribe(user -> {
                 sleepThread();

@@ -30,7 +30,7 @@ public class UserErrorPublisher extends Flux<User> {
             observer.onNext(userProvider.generateNextUser());
         }
 
-        observer.onError(new NullPointerException());
+        observer.onError(new NullPointerException("Null pointer exception occurred."));
     }
 
 }
