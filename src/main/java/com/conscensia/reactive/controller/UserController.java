@@ -21,7 +21,6 @@ public class UserController {
         this.userService = userService;
     }
 
-
     @GetMapping(path = "/reactive", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
     public Flux<User> getReactiveAllUsers() {
         return userService.getReactiveAllUsers();

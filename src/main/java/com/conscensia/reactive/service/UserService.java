@@ -22,14 +22,14 @@ public class UserService {
         this.userPublisher = userPublisher;
     }
 
-    public Flux<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
     public Flux<User> getReactiveAllUsers() {
         Flux<User> users = userPublisher.subscribeOn(Schedulers.elastic())
                                         .take(20);
         return users;
+    }
+
+    public Flux<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     public Mono<User> createUser(User user) {
