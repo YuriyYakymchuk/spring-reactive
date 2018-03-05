@@ -9,6 +9,8 @@ import reactor.core.publisher.Flux;
 
 import java.util.Objects;
 
+import static com.conscensia.reactive.ThreadUtils.sleepThread;
+
 /**
  * PUBLISHER == OBSERVABLE
  *
@@ -29,6 +31,7 @@ public class UserInfinityPublisher extends Flux<User> {
         while (true) {
             try {
                 observer.onNext(userProvider.generateNextUser());
+                sleepThread();
             } catch (Exception e) {
                 observer.onError(e);
             }

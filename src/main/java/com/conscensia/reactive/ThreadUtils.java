@@ -1,8 +1,8 @@
-package com.conscensia.reactive.subscriber;
+package com.conscensia.reactive;
 
 import lombok.SneakyThrows;
 
-public class SubscriberUtils {
+public class ThreadUtils {
 
     @SneakyThrows(InterruptedException.class)
     public static void sleepThread() {

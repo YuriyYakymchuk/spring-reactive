@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import reactor.core.scheduler.Schedulers;
 
-import static com.conscensia.reactive.subscriber.SubscriberUtils.sleepThread;
+import static com.conscensia.reactive.ThreadUtils.sleepThread;
 
 /**
  * Bufferable subscriber. Subscribes to a publisher and introduces a buffer. When the buffer capacity is reached then

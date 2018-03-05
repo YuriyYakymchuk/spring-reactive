@@ -3,6 +3,7 @@ package com.conscensia.reactive.controller;
 import com.conscensia.reactive.domain.User;
 import com.conscensia.reactive.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -18,6 +19,12 @@ public class UserController {
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+
+    @GetMapping(path = "/reactive", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
+    public Flux<User> getReactiveAllUsers() {
+        return userService.getReactiveAllUsers();
     }
 
     @GetMapping

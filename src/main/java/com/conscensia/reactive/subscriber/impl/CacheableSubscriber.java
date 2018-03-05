@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 
-import static com.conscensia.reactive.subscriber.SubscriberUtils.sleepThread;
+import static com.conscensia.reactive.ThreadUtils.sleepThread;
 
 /**
  * Cachable subscriber. Introduces cache on publisher which allows new subscribers to receive the same data from the
