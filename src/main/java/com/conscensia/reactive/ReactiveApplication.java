@@ -14,7 +14,6 @@ import java.util.Locale;
 public class ReactiveApplication {
 
 	public static void main(String[] args) {
-//		Hooks.onOperatorDebug();
 		SpringApplication.run(ReactiveApplication.class, args);
 	}
 
